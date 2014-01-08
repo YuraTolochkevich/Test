@@ -1,0 +1,170 @@
+#
+#
+
+url      = 'http://files.vagrantup.com/precise32.box'
+url_sandbox = 'http://dev2.hortonworks.com.s3.amazonaws.com/stuff/sandbox-hdp-2.0.6-rc7.box'
+#url_sandbox ='ftp://10.2.2.42/pub/temp/sandbox-hdp-2.0.6-rc7.box'
+url_centos = 'https://dl.dropbox.com/sh/9rldlpj3cmdtntc/chqwU6EYaZ/centos-63-32bit-puppet.box'
+url_centos_x64 = 'https://github.com/2creatives/vagrant-centos/releases/download/v0.1.0/centos64-x86_64-20131030.box'
+url_centos_new = 'http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box'
+#url     = 'https://dl.dropbox.com/sh/9rldlpj3cmdtntc/chqwU6EYaZ/centos-63-32bit-puppet.box'
+#url  = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210.box'
+domain   = 'hortonworks.com'
+ram      = '1024'
+
+
+
+Vagrant.configure("2") do |config|
+config.vm.define "sandbox" do |sandbox_config|
+
+  sandbox_config.vm.box = 'sandbox'
+  sandbox_config.vm.box_url = url_sandbox
+  sandbox_config.vm.host_name ='sandbox' + '.' + domain
+  sandbox_config.vm.boot_timeout =2000
+  sandbox_config.vm.network "private_network", ip: '192.168.57.103'
+  #sandbox_config.vm.network "forwarded_port", guest: 8020, host: 8020
+  #sandbox_config.vm.network "forwarded_port", guest: 8050, host: 8050
+  #sandbox_config.vm.network "forwarded_port", guest: 50070, host: 50070
+  #sandbox_config.vm.network "forwarded_port", guest: 11000, host: 11000
+  #sandbox_config.vm.network "forwarded_port", guest: 60080, host: 60080
+ # sandbox_config.vm.network "forwarded_port", guest: 10000, host: 10000
+  sandbox_config.vm.network "forwarded_port", guest: 11000, host: 11000
+  sandbox_config.vm.network "forwarded_port", guest: 11001, host: 11001
+  sandbox_config.vm.network "forwarded_port", guest: 19888, host: 19888
+  sandbox_config.vm.network "forwarded_port", guest: 2181, host: 2181
+  sandbox_config.vm.network "forwarded_port", guest: 3306, host: 3307
+  sandbox_config.vm.network "forwarded_port", guest: 34450, host: 34450
+  sandbox_config.vm.network "forwarded_port", guest: 3978, host: 39278
+  sandbox_config.vm.network "forwarded_port", guest: 41021, host: 41021
+  sandbox_config.vm.network "forwarded_port", guest: 25, host: 41025
+  sandbox_config.vm.network "forwarded_port", guest: 68, host: 42068
+  sandbox_config.vm.network "forwarded_port", guest: 42080, host: 42080
+  sandbox_config.vm.network "forwarded_port", guest: 111, host: 42111
+  sandbox_config.vm.network "forwarded_port", guest: 161, host: 42161
+  sandbox_config.vm.network "forwarded_port", guest: 199, host: 42199
+  sandbox_config.vm.network "forwarded_port", guest: 465, host:42465
+  sandbox_config.vm.network "forwarded_port", guest: 587, host:42587
+  sandbox_config.vm.network "forwarded_port", guest: 631, host:42631
+  sandbox_config.vm.network "forwarded_port", guest:878 , host:42878
+  sandbox_config.vm.network "forwarded_port", guest: 897, host:42897
+  sandbox_config.vm.network "forwarded_port", guest:43253, host:   43253
+  sandbox_config.vm.network "forwarded_port", guest: 43342, host: 43342
+  sandbox_config.vm.network "forwarded_port", guest: 43535, host:43535
+  sandbox_config.vm.network "forwarded_port", guest: 43706, host:43706
+  sandbox_config.vm.network "forwarded_port", guest: 46665, host: 46665
+  sandbox_config.vm.network "forwarded_port", guest: 50010, host:50010
+  sandbox_config.vm.network "forwarded_port", guest: 50030, host:50030
+  sandbox_config.vm.network "forwarded_port", guest: 50070, host:50070
+  sandbox_config.vm.network "forwarded_port", guest: 50075, host:50075
+  sandbox_config.vm.network "forwarded_port", guest: 50090, host:50090
+  sandbox_config.vm.network "forwarded_port", guest: 500111, host:50111
+  sandbox_config.vm.network "forwarded_port", guest: 50300, host:50300
+  sandbox_config.vm.network "forwarded_port", guest: 51076, host:51076
+  sandbox_config.vm.network "forwarded_port", guest: 51111, host:51111
+  sandbox_config.vm.network "forwarded_port", guest: 51809, host:51809
+  sandbox_config.vm.network "forwarded_port", guest: 53190, host:53190
+  sandbox_config.vm.network "forwarded_port", guest: 53302, host:52302
+  sandbox_config.vm.network "forwarded_port", guest: 54201, host:54201
+  sandbox_config.vm.network "forwarded_port", guest: 5432, host:5432
+  sandbox_config.vm.network "forwarded_port", guest: 59620, host:59620
+  sandbox_config.vm.network "forwarded_port", guest: 60000, host: 60000
+  sandbox_config.vm.network "forwarded_port", guest: 60010, host: 60010
+  sandbox_config.vm.network "forwarded_port", guest: 60020, host:60020
+  sandbox_config.vm.network "forwarded_port", guest: 60030, host: 60030
+  sandbox_config.vm.network "forwarded_port", guest: 60080, host:60080
+  sandbox_config.vm.network "forwarded_port", guest: 60572, host:60572
+  sandbox_config.vm.network "forwarded_port", guest: 8000, host:8000
+  sandbox_config.vm.network "forwarded_port", guest: 8020, host: 8020  
+  sandbox_config.vm.network "forwarded_port", guest: 8042, host:8042
+  sandbox_config.vm.network "forwarded_port", guest: 8080, host:8080                                  
+  sandbox_config.vm.network "forwarded_port", guest: 8088, host:8088
+  sandbox_config.vm.network "forwarded_port", guest: 8649, host:8649
+  sandbox_config.vm.network "forwarded_port", guest: 8651, host:8651
+  sandbox_config.vm.network "forwarded_port", guest: 8652, host:8652
+  sandbox_config.vm.network "forwarded_port", guest: 8888, host:8888
+  sandbox_config.vm.network "forwarded_port", guest:9083 , host:9083
+  sandbox_config.vm.network "forwarded_port", guest: 9090, host:9090
+  sandbox_config.vm.network "forwarded_port", guest: 9290, host:9290
+  #sandbox_config.vm.network "forwarded_port", guest: 22, host:22                                            
+                             
+  sandbox_config.vm.provider "virtualbox" do |v|
+  v.name = "sandbox"
+  v.memory = '2048'
+end
+    sandbox_config.vm.provision :puppet, :options => "--verbose --debug" do |puppet|
+        puppet.manifests_path = 'puppet/manifests'
+      puppet.manifest_file  = "sandbox_full.pp"
+    end
+  end
+end 
+Vagrant.configure("2") do |config|
+config.vm.define "balancer" do |balancer_config|
+  balancer_config.vm.box = 'centos_box_x64_6.4'
+  balancer_config.vm.box_url = url_centos_new
+  balancer_config.vm.host_name ='balancer' + '.' + domain
+  balancer_config.vm.network "private_network", ip: '192.168.57.102'
+  
+    balancer_config.vm.provider "virtualbox" do |v|
+  v.name = "balancer"
+  v.memory = '1024'
+end
+
+
+     balancer_config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = 'puppet/manifests'
+   puppet.manifest_file = 'site.pp'
+    puppet.module_path = "puppet/modules"
+    puppet.options = '--hiera_config=/etc/hiera.yaml'
+   end
+   
+end
+ 
+config.vm.define "knox" do |knox_config|
+  knox_config.vm.box = 'centos_box_x64_6.4'
+  knox_config.vm.box_url = url_centos_new
+  knox_config.vm.host_name ='knox' + '.' + domain
+  knox_config.vm.network "private_network", ip: '192.168.57.101'
+   knox_config.vm.network "forwarded_port", guest: 22, host:20022  
+ # knox_config.vm.boot_timeout = 3000
+
+ 
+     knox_config.vm.provider "virtualbox" do |v|
+  v.name = "knox"
+  v.memory = '1024'
+end
+
+#knox_config.vm.provision :shell do |shell|
+#  shell.inline = "mkdir -p /etc/puppet/modules;
+#		  puppet module install --ignore-dependencies  puppetlabs/java --modulepath modules/;
+	          #cd /etc/puppet/modules;
+#                  apt-get update; 
+#                  "
+#  end
+
+  knox_config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = 'puppet/manifests'
+   puppet.manifest_file = 'knox_site.pp'
+    puppet.module_path = "puppet/modules"
+    puppet.options = '--hiera_config=/etc/hiera.yaml'
+#    puppet.working_directory = "/tmp/vagrant-puppet"
+#   puppet.options = "--modulepath '/etc/puppet/modules:/tmp/vagrant-puppet-1'"
+   end
+
+
+
+end
+
+#config.vm.provision :shell do |shell|
+#     shell.inline = "mkdir -p /etc/puppet/modules;
+#     puppet module install puppetlabs-apache;
+#     puppet module install  --ignore-dependencies camptocamp-openssl;
+ #   puppet module install --ignore-dependencies  puppetlabs/java ;
+#     apt-get update;
+#    "
+#end
+#  config.vm.provision :puppet do |puppet|
+#    puppet.manifests_path = 'puppet/manifests'
+#    puppet.manifest_file = 'site.pp'
+#    puppet.module_path = 'puppet/modules'
+#   end
+end
